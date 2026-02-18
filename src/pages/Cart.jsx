@@ -23,61 +23,54 @@ function Cart({ cart, onDecrease, onRemove, total }) {
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "40px auto", fontFamily: "Segoe UI, sans-serif" }}>
-      <h2>Cart</h2>
+  <div className="cart-container">
+    <h2 className="cart-title">Your Cart</h2>
 
-      {cart.length === 0 && <p>Your cart is empty</p>}
+    {cart.length === 0 && (
+      <p className="empty-text">Your cart is empty</p>
+    )}
 
-      {cart.map((item) => (
-        <div
-          key={item._id}
-          style={{
-            marginBottom: "15px",
-            borderBottom: "1px solid #ddd",
-            paddingBottom: "10px",
-          }}
-        >
-          <p>
-            {item.name} - ₹{item.price} × {item.quantity}
-          </p>
+    {cart.map((item) => (
+      <div key={item._id} className="cart-item">
+        
+        <div className="item-info">
+          <h4>{item.name}</h4>
+          <p>₹{item.price} × {item.quantity}</p>
+        </div>
 
+        <div className="cart-actions">
           <button
+            className="btn btn-ghost"
             onClick={() => onDecrease(item._id)}
-            style={{ marginRight: "10px" }}
           >
-            -
+            −
           </button>
 
           <button
+            className="btn btn-ghost"
             onClick={() => onRemove(item._id)}
-            style={{ marginRight: "10px" }}
           >
             Remove
           </button>
         </div>
-      ))}
 
-      {cart.length > 0 && (
-        <>
-          <h3>Total: ₹{total}</h3>
-          <button onClick={handleCheckout} style={checkoutButtonStyle}>
-            Checkout
-          </button>
-        </>
-      )}
-    </div>
-  );
+      </div>
+    ))}
+
+    {cart.length > 0 && (
+      <div className="cart-summary">
+        <h3>Total: ₹{total}</h3>
+
+        <button
+          className="btn btn-primary checkout-btn"
+          onClick={handleCheckout}
+        >
+          Checkout
+        </button>
+      </div>
+    )}
+  </div>
+);
 }
-
-const checkoutButtonStyle = {
-  padding: "12px 20px",
-  backgroundColor: "#6772e5",
-  color: "#fff",
-  border: "none",
-  cursor: "pointer",
-  borderRadius: "5px",
-  marginTop: "15px",
-  fontSize: "16px",
-};
 
 export default Cart;
