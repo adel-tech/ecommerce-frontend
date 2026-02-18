@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 import Home from "./pages/Home";
 import Cart from "./pages/Cart";
+import Success from "./pages/Success";
 
 import ProductDetails from "./pages/ProductDetails";
 
@@ -97,6 +98,7 @@ const handleAddToCart = (product) => {
     path="/products/:id"
     element={<ProductDetails onAddToCart={handleAddToCart} />}
   />
+        <Route path="/success" element={<Success />} />
       </Routes>
     </div>
   );
